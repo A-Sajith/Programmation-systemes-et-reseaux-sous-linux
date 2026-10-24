@@ -1,0 +1,38 @@
+2026-10-10T16:34:17+02:00
+rhel9-lab
+
+NAME               MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda                  8:0    0   50G  0 disk 
+├─sda1               8:1    0    1G  0 part /boot
+└─sda2               8:2    0   45G  0 part 
+  ├─vg_sys-lv_root 253:0    0   20G  0 lvm  /
+  ├─vg_sys-lv_swap 253:1    0    4M  0 lvm  [SWAP]
+  ├─vg_sys-lv_home 253:2    0    5G  0 lvm  /home
+  ├─vg_sys-lv_var  253:3    0   10G  0 lvm  /var
+  └─vg_sys-lv_log  253:4    0    5G  0 lvm  /var/log
+sr0                 11:0    1 14.5G  0 rom  
+NAME               FSTYPE      FSVER            LABEL                    UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                                            
+├─sda1             xfs                                                   60b7d717-d84c-4f4e-b902-0562174b2a5d    464.3M    52% /boot
+└─sda2             LVM2_member LVM2 001                                  WfdFf8-0pAB-LMIm-Jq4n-Lo3I-c3QS-17dwIF                
+  ├─vg_sys-lv_root xfs                                                   303ff0b2-27e8-4d9a-9a49-8929cb730086     17.7G    11% /
+  ├─vg_sys-lv_swap swap        1                                         793f13ec-f3c8-45de-8c1b-d09c8b9d4ec6                  [SWAP]
+  ├─vg_sys-lv_home xfs                                                   b339149a-bd6a-4e16-abef-d5020dcd6ccd      4.9G     1% /home
+  ├─vg_sys-lv_var  xfs                                                   88fc6260-3f28-4748-b2e1-7d981e9036ea      9.3G     6% /var
+  └─vg_sys-lv_log  xfs                                                   f3b99271-ad01-4de8-b836-84a3fc9affda      4.9G     2% /var/log
+sr0                iso9660     Joliet Extension RHEL-9-8-0-BaseOS-x86_64 2026-05-11-17-14-45-00                                
+Filesystem                 Type      Size  Used Avail Use% Mounted on
+devtmpfs                   devtmpfs  832M     0  832M   0% /dev
+tmpfs                      tmpfs     854M     0  854M   0% /dev/shm
+tmpfs                      tmpfs     342M  6.4M  336M   2% /run
+/dev/mapper/vg_sys-lv_root xfs        20G  2.3G   18G  12% /
+/dev/sda1                  xfs       960M  496M  465M  52% /boot
+/dev/mapper/vg_sys-lv_var  xfs        10G  653M  9.4G   7% /var
+/dev/mapper/vg_sys-lv_home xfs       5.0G   68M  4.9G   2% /home
+/dev/mapper/vg_sys-lv_log  xfs       5.0G   79M  4.9G   2% /var/log
+tmpfs                      tmpfs     171M     0  171M   0% /run/user/0
+tmpfs                      tmpfs     171M     0  171M   0% /run/user/1001
+NAME      TYPE      SIZE USED PRIO
+/dev/dm-1 partition   4M   0B   -2
+TARGET   SOURCE                    FSTYPE OPTIONS
+/var/log /dev/mapper/vg_sys-lv_log xfs    rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
