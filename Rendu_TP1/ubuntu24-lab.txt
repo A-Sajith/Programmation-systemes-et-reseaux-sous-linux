@@ -1,0 +1,82 @@
+MACHINE=ubuntu24-lab
+
+$ date -Is
+2026-10-16T17:47:31+02:00
+
+$ hostnamectl | head -5
+ Static hostname: ubuntu24-lab
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: 64059e3cf3f74eac8df93d685e5aa59c
+         Boot ID: 59b40c8869ec47d888aad259081345dc
+
+$ lsblk -f
+NAME               FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                 
+├─sda1                                                                                              
+├─sda2             ext4        1.0            5a618120-d39a-4d64-b494-651867f4d9a6    802,7M    11% /boot
+└─sda3             LVM2_member LVM2 001       1WSssy-oq3c-VH8f-3puO-s1SQ-aD8i-3KayqG                
+  ├─vg_sys-lv_root ext4        1.0            4b378672-b859-4d2f-b1cf-8fcf2ed368c4        7G    23% /
+  ├─vg_sys-lv_var  ext4        1.0            d0bc737b-321d-4d56-9402-63ecd358e3ce      3,2G    11% /var
+  ├─vg_sys-lv_log  ext4        1.0            9d77a638-0c3a-4375-b82c-41e30332863e      1,8G     1% /var/log
+  ├─vg_sys-lv_home ext4        1.0            9abdbe1a-dcb2-44b9-97d6-e56250671dfc      1,8G     0% /home
+  └─vg_sys-lv_swap swap        1              6fcd4266-f416-42c1-b36a-bf355e0928a0                  [SWAP]
+sr0                                                                                                 
+
+$ df -hT
+Filesystem                 Type   Size  Used Avail Use% Mounted on
+tmpfs                      tmpfs  192M  1,3M  191M   1% /run
+/dev/mapper/vg_sys-lv_root ext4   9,8G  2,3G  7,0G  25% /
+tmpfs                      tmpfs  960M     0  960M   0% /dev/shm
+tmpfs                      tmpfs  5,0M     0  5,0M   0% /run/lock
+/dev/mapper/vg_sys-lv_var  ext4   3,9G  429M  3,3G  12% /var
+/dev/mapper/vg_sys-lv_home ext4   2,0G   80K  1,8G   1% /home
+/dev/mapper/vg_sys-lv_log  ext4   2,0G   28M  1,8G   2% /var/log
+/dev/sda2                  ext4   974M  104M  803M  12% /boot
+tmpfs                      tmpfs  192M   12K  192M   1% /run/user/1000
+tmpfs                      tmpfs  512M     0  512M   0% /tmp
+
+$ swapon --show
+NAME      TYPE      SIZE USED PRIO
+/dev/dm-4 partition   2G   0B   -2
+
+$ systemctl --failed
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+
+$ grep -E 'Start-Date|Commandline|End-Date' /var/log/apt/history.log | tail -6
+Start-Date: 2026-10-16  14:23:23
+Commandline: /usr/bin/unattended-upgrades -v
+End-Date: 2026-10-16  14:23:58
+Start-Date: 2026-10-16  17:06:55
+Commandline: apt -y full-upgrade
+End-Date: 2026-10-16  17:07:28
+
+$ sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'
+permitrootlogin no
+passwordauthentication yes
+
+$ sudo passwd -S root
+root L 2025-08-05 0 99999 7 -1
+
+$ id sajith; id killian
+uid=1000(sajith) gid=1000(sajith) groups=1000(sajith),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),101(lxd)
+uid=1001(killian) gid=1001(killian) groups=1001(killian),27(sudo),100(users)
+
+$ ip -br a
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.113.128/24 metric 100 fe80::20c:29ff:fea5:2ae9/64 
+ens34            DOWN           
+
+$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere                  
+22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)             
+
