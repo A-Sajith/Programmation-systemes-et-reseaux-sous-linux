@@ -6,36 +6,47 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 70bc7b65c7354f4ea9898a1b34be7958
-         Boot ID: dc80e7acdbeb4718bb9dea009e33bd68
+         Boot ID: 28ee99e1379e4f0c9a0bbcf15e16b091
+  Virtualization: kvm
+Operating System: Red Hat Enterprise Linux 9.8 (Plow)
+     CPE OS Name: cpe:/o:redhat:enterprise_linux:9::baseos
+          Kernel: Linux 5.14.0-687.54.1.el9_8.x86_64
+    Architecture: x86-64
+ Hardware Vendor: QEMU
+  Hardware Model: Standard PC _i440FX + PIIX, 1996_
+Firmware Version: rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org
 
 === LSBLK ===
-NAME               FSTYPE      FSVER            LABEL                    UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
-sda                                                                                                                            
-├─sda1             xfs                                                   60b7d717-d84c-4f4e-b902-0562174b2a5d    464.3M    52% /boot
-└─sda2             LVM2_member LVM2 001                                  WfdFf8-0pAB-LMIm-Jq4n-Lo3I-c3QS-17dwIF                
-  ├─vg_sys-lv_root xfs                                                   303ff0b2-27e8-4d9a-9a49-8929cb730086     17.7G    11% /
-  ├─vg_sys-lv_swap swap        1                                         793f13ec-f3c8-45de-8c1b-d09c8b9d4ec6                  [SWAP]
-  ├─vg_sys-lv_home xfs                                                   b339149a-bd6a-4e16-abef-d5020dcd6ccd      4.9G     1% /home
-  ├─vg_sys-lv_var  xfs                                                   88fc6260-3f28-4748-b2e1-7d981e9036ea      9.3G     6% /var
-  └─vg_sys-lv_log  xfs                                                   f3b99271-ad01-4de8-b836-84a3fc9affda      4.9G     2% /var/log
-sr0                iso9660     Joliet Extension RHEL-9-8-0-BaseOS-x86_64 2026-05-11-17-14-45-00                                
+NAME              FSTYPE FSVER LABEL                   UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda
+├─sda1            xfs                                  60b7d717-d84c-4f4e-b902-0562174b2a5d    403.1M    58% /boot
+└─sda2            LVM2_m LVM2                          WfdFf8-0pAB-LMIm-Jq4n-Lo3I-c3QS-17dwIF
+  ├─vg_sys-lv_root
+  │               xfs                                  303ff0b2-27e8-4d9a-9a49-8929cb730086     17.3G    13% /
+  ├─vg_sys-lv_swap
+  │               swap   1                             70dff6b4-4a3f-447a-9afe-3380266b1a3c                  [SWAP]
+  ├─vg_sys-lv_home
+  │               xfs                                  b339149a-bd6a-4e16-abef-d5020dcd6ccd      4.6G     6% /home
+  ├─vg_sys-lv_var xfs                                  88fc6260-3f28-4748-b2e1-7d981e9036ea      9.3G     7% /var
+  └─vg_sys-lv_log xfs                                  f3b99271-ad01-4de8-b836-84a3fc9affda      4.9G     2% /var/log
+sr0               iso966 Jolie RHEL-9-8-0-BaseOS-x86_64
+                                                       2026-05-11-17-14-45-00
 
 === DF ===
 Filesystem                 Type      Size  Used Avail Use% Mounted on
 devtmpfs                   devtmpfs  832M     0  832M   0% /dev
 tmpfs                      tmpfs     854M     0  854M   0% /dev/shm
-tmpfs                      tmpfs     342M  6.4M  336M   2% /run
-/dev/mapper/vg_sys-lv_root xfs        20G  2.3G   18G  12% /
-/dev/sda1                  xfs       960M  496M  465M  52% /boot
-/dev/mapper/vg_sys-lv_var  xfs        10G  653M  9.4G   7% /var
-/dev/mapper/vg_sys-lv_home xfs       5.0G   68M  4.9G   2% /home
-/dev/mapper/vg_sys-lv_log  xfs       5.0G   79M  4.9G   2% /var/log
-tmpfs                      tmpfs     171M     0  171M   0% /run/user/0
+tmpfs                      tmpfs     342M  6.8M  335M   2% /run
+/dev/mapper/vg_sys-lv_root xfs        20G  2.7G   18G  14% /
+/dev/sda1                  xfs       960M  557M  404M  59% /boot
+/dev/mapper/vg_sys-lv_var  xfs        10G  671M  9.3G   7% /var
+/dev/mapper/vg_sys-lv_home xfs       5.0G  319M  4.7G   7% /home
+/dev/mapper/vg_sys-lv_log  xfs       5.0G   81M  4.9G   2% /var/log
 tmpfs                      tmpfs     171M     0  171M   0% /run/user/1001
 
 === SWAPON ===
 NAME      TYPE      SIZE USED PRIO
-/dev/dm-1 partition   4M   0B   -2
+/dev/dm-1 partition   2G   0B   -2
 
 === SYSTEMCTL ===
   UNIT LOAD ACTIVE SUB DESCRIPTION
@@ -53,21 +64,21 @@ permitrootlogin no
 passwordauthentication yes
 
 === IP ===
-lo               UNKNOWN        127.0.0.1/8 ::1/128 
-ens18            UP             10.0.60.1/24 fe80::be24:11ff:fead:ff27/64 
+lo               UNKNOWN        127.0.0.1/8 ::1/128
+ens18            UP             10.0.60.1/24 fe80::be24:11ff:fead:ff27/64
 
 === FIREWALL ===
 public (active)
   target: default
   icmp-block-inversion: no
   interfaces: ens18
-  sources: 
+  sources:
   services: cockpit dhcpv6-client ssh
-  ports: 
-  protocols: 
+  ports:
+  protocols:
   forward: yes
   masquerade: no
-  forward-ports: 
-  source-ports: 
-  icmp-blocks: 
-  rich rules: 
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
