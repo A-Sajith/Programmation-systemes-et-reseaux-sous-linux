@@ -36,7 +36,15 @@
 * Validation de la configuration (`sshd -t`) et rechargement des services (`sshd` sur Red Hat, `ssh` sur Ubuntu).
 * Vérification du blocage effectif de root via `ssh -o BatchMode=yes root@... true`.
 
-**4. Collecte des preuves (Livrables)**
+**4. Nettoyage et sécurisation du pare-feu (RHEL 9)**
+* Analyse de la configuration par défaut de `firewalld` (`sudo firewall-cmd --list-all`) révélant l'ouverture de services inutilisés dans la zone public (`cockpit`, `dhcpv6-client`).
+* Suppression explicite et définitive de ces services pour réduire la surface d'attaque :
+  * `sudo firewall-cmd --zone=public --remove-service=cockpit --permanent`
+  * `sudo firewall-cmd --zone=public --remove-service=dhcpv6-client --permanent`
+* Application des modifications à chaud via `sudo firewall-cmd --reload`.
+* Vérification finale attestant que seul le service `ssh` reste autorisé en entrée.
+
+**5. Collecte des preuves (Livrables)**
 * Création de l'arborescence requise (`tp01/preuves/`).
 * Scripting de la collecte d'informations système (horodatage, hostnamectl, lsblk, dnf/apt history, ip, firewall) redirigée vers `rhel9-lab.txt` et `Ubuntu24.04-lab.txt`.
 * Génération des exports de partitionnement (`lsblk-rhel9-lab.txt`, `lsblk-ubuntu24-lab.txt`).
