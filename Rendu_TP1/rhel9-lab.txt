@@ -73,7 +73,7 @@ public (active)
   icmp-block-inversion: no
   interfaces: ens18
   sources:
-  services: cockpit dhcpv6-client ssh
+  services: ssh
   ports:
   protocols:
   forward: yes
