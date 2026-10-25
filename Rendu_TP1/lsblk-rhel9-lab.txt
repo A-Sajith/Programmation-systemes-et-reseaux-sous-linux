@@ -2,15 +2,15 @@
 rhel9-lab
 
 NAME               MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-sda                  8:0    0   50G  0 disk 
+sda                  8:0    0   50G  0 disk
 ├─sda1               8:1    0    1G  0 part /boot
-└─sda2               8:2    0   45G  0 part 
+└─sda2               8:2    0   45G  0 part
   ├─vg_sys-lv_root 253:0    0   20G  0 lvm  /
-  ├─vg_sys-lv_swap 253:1    0    4M  0 lvm  [SWAP]
+  ├─vg_sys-lv_swap 253:1    0    2G  0 lvm  [SWAP]
   ├─vg_sys-lv_home 253:2    0    5G  0 lvm  /home
   ├─vg_sys-lv_var  253:3    0   10G  0 lvm  /var
   └─vg_sys-lv_log  253:4    0    5G  0 lvm  /var/log
-sr0                 11:0    1 14.5G  0 rom  
+sr0                 11:0    1 14.5G  0 rom
 NAME               FSTYPE      FSVER            LABEL                    UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
 sda                                                                                                                            
 ├─sda1             xfs                                                   60b7d717-d84c-4f4e-b902-0562174b2a5d    464.3M    52% /boot
